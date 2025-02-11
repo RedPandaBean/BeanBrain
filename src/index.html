@@ -17,22 +17,8 @@
 </head>
 
 <style>
-  .menupressed {
-    padding: 0.5rem;
-    background-color: #FFC2FA;
-    border: 1px solid #FF96F6;
-    border-bottom: none;
-    flex: 1;
-    text-align: center;
-    border-radius: 0.8rem 0.8rem 0rem 0rem;
-    font-family: "Lobster Two", serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #5E0056;
-    font-size: 20px;
-  }
-
-  .menuunpressed {
+  .menu {
+    /* Normal things */
     padding: 0.5rem;
     background-color: #EFBEEA;
     border: 1px solid #FF96F6;
@@ -44,6 +30,11 @@
     font-style: normal;
     color: #5E0056;
     font-size: 20px;
+    cursor: pointer;
+  }
+  .menu.pressed {
+    border-bottom: none;
+    background-color: #FFC2FA;
   }
 
   .date {
@@ -66,6 +57,18 @@
     color: #00535C;
     font-size: 27px;
   }
+
+  .homepurple {
+    padding: 0.5rem;
+    text-align: center;
+    font-family: "Lobster Two", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #19006B;
+    background-color: #BAACE8;
+    font-size: 70px;
+    border-radius: 1.5rem;
+  }
 </style>
 
 <body id="app"
@@ -76,13 +79,31 @@
     </div>
   </div>
   <div style="position: absolute; top:3.3rem; right:0; left:0; height:2.7rem; display:flex; ">
-    <div class="menupressed">Home</div>
-    <div class="menuunpressed">Log</div>
-    <div class="menuunpressed">Calendar</div>
-    <div class="menuunpressed">Stats</div>
-    <div class="menuunpressed">Settings</div>
+    <div class="menu" :class="{'pressed': page == 1}" @click="page = 1">Home</div>
+    <div class="menu" :class="{'pressed': page == 2}" @click="page = 2">Log</div>
+    <div class="menu" :class="{'pressed': page == 3}" @click="page = 3">Calendar</div>
+    <div class="menu" :class="{'pressed': page == 4}" @click="page = 4">Stats</div>
+    <div class="menu" :class="{'pressed': page == 5}" @click="page = 5">Settings</div>
   </div>
   <div style="position: absolute; top: 6rem; right:0; left:0; bottom:0; background-color: #FFC2FA;">
+    <div style="display: flex; flex-direction:column; padding:2rem" v-if="page == 1">
+      <div class="homepurple">
+        <div style="padding:3rem"> {{streak}} </div>
+        <div style="font-family: sans-serif; font-size: 25px">Check in Streak</div>
+      </div>
+    </div>
+    <div v-if="page == 2">
+      TREES
+    </div>
+    <div v-if="page == 3">
+      DA DATES
+    </div>
+    <div v-if="page == 4">
+      BLEGH MATH
+    </div>
+    <div v-if="page == 5">
+      SILLY NO CONTROL FOR U
+    </div>
   </div>
 
 </body>
@@ -94,11 +115,34 @@
     setup() {
       const date = ref(moment().format('MMMM Do, YYYY'))
       const time = ref(moment().format('hh:mm a'))
+      const page = ref(1)
+      const streak = ref(0)
+      const checkin = ref(new Date().getDate())
+      
+      if (localStorage.getItem("lastcheckin") == undefined){
+        localStorage.setItem("lastcheckin", checkin.value)
+      }
+      
+      if (localStorage.getItem("streak") == undefined){
+        localStorage.setItem("streak",0)
+      }
+      
+      streak.value = +localStorage.getItem("streak")+1
+      
+
+      if (checkin.value - localStorage.getItem("lastcheckin")>1){
+        streak.value = 0
+      }
+
+      localStorage.setItem("streak",streak.value)
+      localStorage.setItem("lastcheckin", checkin.value)
+
       setInterval(() => {
         time.value = moment().format('hh:mm a');
     }, 1000)
+
       return {
-        date, time
+        date, time, page, streak
       }
     }
   }).mount('#app')
