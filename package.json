@@ -1,0 +1,17 @@
+{
+  "name": "tauri-bean",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "vite dev"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  },
+  "dependencies": {
+    "@tauri-apps/plugin-notification": "~2",
+    "vite": "^6.1.0"
+  }
+}
