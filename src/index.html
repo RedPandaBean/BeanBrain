@@ -107,6 +107,11 @@
     box-sizing: border-box;
   }
   
+  .slider {
+    width: 100%;
+    flex:4.4;
+  }
+
 </style>
 
 <body id="app"
@@ -138,28 +143,16 @@
     </div>
 
     <div style="display:flex; flex-wrap:wrap; gap: 1rem; justify-content:space-evenly ;" v-if="page == 2 && logpage == 0">
-        <div class="logpurple" @click="logpage = 1;">
-          High Energy
-        </div>
-        <div class="logpurple">
-          Emotion Crash
-        </div>
-        <div class="logpurple">
-          Daily Feels
-        </div>
-        <div class="logpurple">
-          Place-holder
-        </div>
-        <div class="logpurple">
-          Place-holder
-        </div>
-        <div class="logpurple">
-          Place-holder
-        </div>
+        <div class="logpurple" @click="logpage = 1;">High Energy</div>
+        <div class="logpurple" @click="logpage = 2;">Emotion Crash</div>
+        <div class="logpurple" @click="logpage = 3;">Daily Feels</div>
+        <div class="logpurple" @click="logpage = 4;">Period Start</div>
+        <div class="logpurple">Period End</div>
+        <div class="logpurple">Weight</div>
     </div>
 
     <div v-if="page == 2 && logpage == 1" style="height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; gap:1.75rem;">
-      <div class="logpurple" style="padding:1rem; width: 100%; height: 85%; box-sizing: border-box;">
+      <div class="logpurple" style="padding:1rem; width: 100%; height: 90%; box-sizing: border-box;">
         <div style="width:100%; font-size: 15px; display:flex; flex-direction:column; justify-content: space-evenly; gap:1rem; box-sizing: border-box;">
           <div style="font-size:25px;"> High Energy </div>
           <div>
@@ -184,7 +177,248 @@
           <div> Additional Notes: <br> <input type="text" class="entryfield" style="height:10rem;"> </div>
         </div>
       </div>
-      <div class="logpurple" style="width:100%;" @click="" >
+      <div class="logpurple" style="width:100%;" @click="logpage = 0; " >
+        Submit Log
+      </div>
+    </div>
+
+    <div v-if="page == 2 && logpage == 2" style="height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; gap:1.75rem;">
+      <div class="logpurple" style="padding:1rem; width: 100%; height: 85%; box-sizing: border-box;">
+        <div style="width:100%; font-size: 15px; display:flex; flex-direction:column; justify-content: space-evenly; gap:1rem; box-sizing: border-box;">
+        </div>
+      </div>
+      <div class="logpurple" style="width:100%;" @click="logpage = 0; " >
+        Submit Log
+      </div>
+    </div>
+
+    <div v-if="page == 2 && logpage == 3" style="height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; gap:1.75rem;">
+      <div class="logpurple" style="padding:1rem; width: 100%; height: 90%; box-sizing: border-box;">
+        <div style="width:100%; font-size: 15px; display:flex; flex-direction:column; justify-content: space-evenly; gap:0.27rem; box-sizing: border-box;">
+          <div style="font-size:25px;"> Daily Feels </div>
+          <div>
+            <div>Date:</div>
+            <input type="date" class="entryfield" style="text-align: center; font-size: 15px;">
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">1 am</div>
+            <div style="flex:0.6;"><input type="checkbox" v-model="ischecked"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange" :disabled="ischecked">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">2 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">3 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">4 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">5 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">6 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">7 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">8 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">9 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">10 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">11 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">12 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">1 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">2 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">3 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">4 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">5 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">6 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">7 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">8 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">9 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">10 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">11 pm</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+          <div style="display:flex;">
+            <div style="flex:1.4;">12 am</div>
+            <div style="flex:0.6;"><input type="checkbox"></div>
+            <div style="flex:1.8;">sleeping</div>
+            <div style="flex:0.4;"></div>
+            <div style="flex:0.4;">😭</div>
+            <input type="range" min="0" max="10" value="5" class="slider" id="myRange">
+            <div style="flex:0.4;">😊</div>
+          </div>
+        </div>
+      </div>
+      <div class="logpurple" style="width:100%;" @click="logpage = 0; " >
         Submit Log
       </div>
     </div>
@@ -215,7 +449,8 @@
       const page = ref(2)
       const streak = ref(0)
       const currentday = ref(getdaynumber(new Date().valueOf()))
-      const logpage = ref(1)
+      const logpage = ref(3)
+      const ischecked = ref(0)
       
 
       function getdaynumber(seconds) {
@@ -250,7 +485,7 @@
     }, 1000)
 
       return {
-        date, time, page, streak, logpage
+        date, time, page, streak, logpage, ischecked
       }
     },
     methods: {
