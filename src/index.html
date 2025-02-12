@@ -95,8 +95,8 @@
     border-radius: 1.5rem;
     width:100%;
     border: 1px solid #6E49E8;
-    text-align:center;
     box-sizing: border-box;
+    padding:0.2rem;
   }
 
   .checkbox {
@@ -164,14 +164,14 @@
           <div style="font-size:25px;"> High Energy </div>
           <div>
             <div>Date of Event:</div>
-            <input type="date" class="entryfield">
+            <input type="date" class="entryfield" style="text-align: center;">
           </div>
           <div style="display:flex;">
-            <div style="flex:1;"> Start Time: <br> <input type="time" class="entryfield"> </div>
+            <div style="flex:1;"> Start Time: <br> <input type="time" class="entryfield" style="text-align: center;"> </div>
             <div style="flex:0.1;"></div>
-            <div style="flex:1;"> End Time: <br> <input type="time" class="entryfield"> </div>
+            <div style="flex:1;"> End Time: <br> <input type="time" class="entryfield" style="text-align: center;"> </div>
           </div>
-          <div> Cause: <br> <input type="text" class="entryfield"> </div>
+          <div> Cause: <br> <input type="text" class="entryfield" style="text-align: center;"> </div>
           <div> What Happened: <br> <input type="text" class="entryfield" style="height:7rem;"> </div>
           <div>
             <div> Which Strategies Were Used: </div>
@@ -181,7 +181,7 @@
               <div style="flex:1; font-size:11px;"> <input type="checkbox" class="checkbox"> Asking for Help </div>
             </div>
           </div>
-          <div> Additional Notes <br> <input type="text" class="entryfield" style="height:11rem;"> </div>
+          <div> Additional Notes: <br> <input type="text" class="entryfield" style="height:10rem;"> </div>
         </div>
       </div>
       <div class="logpurple" style="width:100%;" @click="" >
