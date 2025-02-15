@@ -225,10 +225,10 @@
       <div class="logpurple" @click="logpage = 1;">High Energy</div>
       <div class="logpurple" @click="logpage = 2;">Emotion Crash</div>
       <div class="logpurple" @click="logpage = 3;">Daily Feels</div>
-      <div class="logpurple" @click="logpage = 4;">Period Start</div>
+      <div class="logpurple" @click="logpage = 4;">Day Dreams</div>
+      <div class="logpurple" @click="logpage = 5;">Period Start</div>
       <div class="logpurple">Period End</div>
       <div class="logpurple">Weight</div>
-      <div style="background-color: green; width:100px; height:100px;" v-for="entry in log">{{entry.date}}, {{entry.stime}}, {{entry.etime}}, {{entry.cause}}, {{entry.happened}}, {{entry.strat1}}, {{entry.strat2}}, {{entry.strat3}}, {{entry.notes}}</div>
     </div>
 
     <div v-if="page == 2 && logpage == 1"
@@ -249,7 +249,7 @@
             </div>
           </div>
           <div> Cause: <br> <input type="text" class="entryfield" style="text-align: center;" v-model="HighEnergyCause"> </div>
-          <div> What Happened: <br> <textarea class="entryfield" style="height:8rem; padding:0.4rem;" v-model="HighEnergyWhatHappened"></textarea> </div>
+          <div> What Happened: <br> <textarea class="entryfield" style="height:8rem; padding:0.4rem; resize:none;" v-model="HighEnergyWhatHappened"></textarea> </div>
           <div>
             <div> Which Strategies Were Used: </div>
             <div style="display:flex;">
@@ -266,7 +266,7 @@
                   <input type="radio" checked="checked" name="radio" v-model="HighEnergyPositiveStrategy3"><div class="checkmark"></div></div></div>
             </div>
           </div>
-          <div> Additional Notes: <br> <textarea class="entryfield" style="height:9rem; padding:0.4rem;"  v-model="HighEnergyAdditionalNotes"></textarea> </div>
+          <div> Additional Notes: <br> <textarea class="entryfield" style="height:9rem; padding:0.4rem; resize:none;"  v-model="HighEnergyAdditionalNotes"></textarea> </div>
         </div>
       </div>
       <div class="logpurple" style="width:100%; margin-top: 2rem; height: 2.5rem;" @click="logpage = 0; log.push({date: HighEnergyDate, stime: HighEnergyStartTime, etime: HighEnergyEndTime, cause: HighEnergyCause, happened: HighEnergyWhatHappened, strat1: HighEnergyPositiveStrategy1, strat2: HighEnergyPositiveStrategy2, strat3: HighEnergyPositiveStrategy3, notes: HighEnergyAdditionalNotes})">
@@ -310,7 +310,7 @@
     </div>
 
     <div v-if="page == 3" @click="functionname('blahhhhh')">
-      DA DATES
+      <div style="background-color: green; width:100px; height:100px;" v-for="entry in log">{{entry.date}}, {{entry.stime}}, {{entry.etime}}, {{entry.cause}}, {{entry.happened}}, {{entry.strat1}}, {{entry.strat2}}, {{entry.strat3}}, {{entry.notes}}</div>
     </div>
 
     <div v-if="page == 4">
@@ -318,7 +318,12 @@
     </div>
 
     <div v-if="page == 5">
-      SILLY NO CONTROL FOR U
+      <div style="text-align: center;">Local Storage</div>
+      <textarea class="entryfield" style="resize:none; height:8rem; padding:0.4rem;" v-model="LocalStorageExport"></textarea>
+      <div style="display:flex;">
+        <div style="flex:1;" @click="Import">Import Data</div>
+        <div style="background-color: pink;" @click="Export">Export Data</div>
+      </div>
     </div>
 
   </div>
@@ -332,12 +337,13 @@
     setup() {
       const date = ref(moment().format('MMMM Do, YYYY'))
       const time = ref(moment().format('hh:mm a'))
-      const page = ref(2)
+      const page = ref(5)
       const streak = ref(0)
       const currentday = ref(getdaynumber(new Date().valueOf()))
       const logpage = ref(1)
       const ischecked = ref(0)
       const log = ref([])
+      const LocalStorageExport = ref('')
       const HighEnergyDate = ref('')
       const HighEnergyStartTime = ref('')
       const HighEnergyEndTime = ref('')
@@ -384,17 +390,43 @@
       setInterval(() => {
         time.value = moment().format('hh:mm a');
         localStorage.setItem("logs", JSON.stringify(log.value))
-      }, 1000)
+      }, 20000)
 
       return {
-        date, time, page, streak, logpage, ischecked, log, 
+        date, time, page, streak, logpage, ischecked, log, LocalStorageExport, 
         HighEnergyDate, HighEnergyStartTime, HighEnergyEndTime, HighEnergyCause, HighEnergyWhatHappened, HighEnergyPositiveStrategy1, HighEnergyPositiveStrategy2, HighEnergyPositiveStrategy3, HighEnergyAdditionalNotes
        }
     },
     methods: {
-      functionname: (parametersgohere) => {
-        console.log(this.time.value)
-      }
+      Export() {
+        this.LocalStorageExport = JSON.stringify(localStorage)
+      },
+
+      Import(){
+        localStorage.clear()
+        let input = JSON.parse(this.LocalStorageExport)
+        for(key in input){
+          localStorage.setItem(key, input[key]) 
+        }
+        if (localStorage.getItem("lastcheckin") == undefined) {
+          localStorage.setItem("lastcheckin", this.currentday)
+        }
+        if (localStorage.getItem("streak") == undefined) {
+          localStorage.setItem("streak", 0)
+        }
+        if (localStorage.getItem("logs") == undefined){
+          localStorage.setItem("logs", JSON.stringify([]))
+        }
+        this.streak = +localStorage.getItem("streak")
+        this.log = JSON.parse(localStorage.getItem("logs"))
+        if (this.currentday - localStorage.getItem("lastcheckin") > 1) {
+          this.streak = 0
+        } else if (this.currentday - localStorage.getItem("lastcheckin") == 1) {
+          this.streak++
+        }
+        localStorage.setItem("streak", this.streak)
+        localStorage.setItem("lastcheckin", this.currentday)
+       }
     }
   }).mount('#app')
 </script>
